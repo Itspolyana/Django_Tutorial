@@ -1,10 +1,13 @@
 # config/urls.py
-from django.contrib import admin 
-from django.urls import include, path
+from django.contrib import admin
+from django.urls import path, include
+from rest_framework import routers
+from clientes.views import ClientesViewSet
+
+router = routers.DefaultRouter()
+router.register('clientes', ClientesViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('posts.urls')),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/v1/dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('api/v1/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('', include(router.urls)),
 ]
